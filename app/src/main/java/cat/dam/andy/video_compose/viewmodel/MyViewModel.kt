@@ -1,9 +1,11 @@
 import android.content.Context
 import android.util.Log
+import androidx.annotation.OptIn
 import androidx.lifecycle.ViewModel
 import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -53,6 +55,7 @@ class MyViewModel : ViewModel() {
             Log.d("ExoPlayer:", "changed state to $stateString")
         }
 
+        @OptIn(UnstableApi::class)
         override fun onPlayerError(error: PlaybackException) {
             if (error.cause is androidx.media3.common.ParserException) {
                 val errorMessage = "Error: Incorrect MIME type or malformed media file."
